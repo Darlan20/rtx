@@ -1,8 +1,11 @@
-import React from "react";
+import React,{useState}from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 
 export default function App() {
-
+const [peso, setPeso] = useState("");
+const [altura, setAltura] = useState("");
+const [situacao, setSituacao] = useState("");
+const [resultado, setResultado] = useState("");
   return (
 
     <View style= {estilos.caixa}>
@@ -11,17 +14,19 @@ export default function App() {
       
         placeholder="Digite o valor do peso: "
         keyboardType="numeric"
-        value="peso"
+        value={peso}
+        onChangeText={setPeso}
       />
       <TextInput style={estilos.input}
         placeholder="Digite o valor da altura: "
         keyboardType="numeric"
-        value="altura"
+        value={altura}
+        onChangeText={setAltura}
       />
       <Button title="Calcular IMC"/>
       <View style={estilos.resultado}>
-      <Text style={estilos.textoResultado}>IMC: </Text>
-      <Text style={estilos.textoResultado}>Situação: </Text>
+      <Text style={estilos.textoResultado}>IMC:{resultado} </Text>
+      <Text style={estilos.textoResultado}>Situação: {situacao} </Text>
       
       
       </View>
