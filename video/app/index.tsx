@@ -23,7 +23,30 @@ const [resultado, setResultado] = useState("");
         value={altura}
         onChangeText={setAltura}
       />
-      <Button title="Calcular IMC"/>
+      <Button title="Calcular IMC"
+        onPress={() => {
+          const pesoNum = parseFloat(peso);
+          const alturaNum = parseFloat(altura);
+          if (isNaN(pesoNum) || isNaN(alturaNum) || alturaNum === 0) {
+            setResultado("Entrada inválida");
+            setSituacao("");
+            return;
+          }
+          const imc = pesoNum / (alturaNum * alturaNum);
+          setResultado(imc.toFixed(2));
+          if (imc < 18.5) {
+            setSituacao("Abaixo do peso");
+          } else if (imc >= 18.5 && imc < 25) {
+            setSituacao("Peso normal");
+          } else if (imc >= 25 && imc < 30) {
+            setSituacao("Sobrepeso");
+          } else {
+            setSituacao("Obesidade");
+          }
+        }}
+      
+      
+      />
       <View style={estilos.resultado}>
       <Text style={estilos.textoResultado}>IMC:{resultado} </Text>
       <Text style={estilos.textoResultado}>Situação: {situacao} </Text>
